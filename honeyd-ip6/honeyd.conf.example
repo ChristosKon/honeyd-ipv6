@@ -1,0 +1,16 @@
+create default
+set default default tcp action block
+set default default udp action block
+set default default icmp action block
+
+create solaris
+set solaris default udp action reset
+set solaris personality "Avaya G3 PBX version 8.3"
+set solaris default tcp action reset
+add solaris tcp port 80 "scripts/web.sh"
+
+set solaris ethernet "aa:00:04:78:98:77"
+
+bind 192.168.1.1 solaris
+
+bind 2001:db8::1 solaris
